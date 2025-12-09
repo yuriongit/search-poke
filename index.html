@@ -22,7 +22,7 @@
                 <p class="text-zinc-400 uppercase">Search all your favorite Poke's</p>
             </div>
             <div class="max-w-lg space-x-2.5 flex flex-row min-w-5xl w-full items-center">
-                <input type="text" value="Squirtle" placeholder="Try searching Squirtle..." autofocus id="pokeInput" placeholder='' autocomplete="off" class="uppercase text-zinc-400 outline w-full text-2xl outline-zinc-800 rounded px-3.5 py-2.5">
+                <input type="text" placeholder="Try searching Squirtle..." autofocus id="pokeInput" placeholder='' autocomplete="off" class="uppercase text-zinc-400 outline w-full text-2xl outline-zinc-800 rounded px-3.5 py-2.5">
                 <button id="pokeButton" class="w-fit px-5 cursor-pointer transition-all hover:-rotate-x-10 hover:-rotate-y-8 ease-in-out duration-400 text-center text-2xl font-bold text-purple-500 outline outline-zinc-800 rounded py-2.5">
                     <i class='bx bx-send'></i> 
                 </button>
@@ -31,32 +31,35 @@
         <div class="mb-10 w-full bg-white/0.5 max-w-5xl min-h-[400px] h-full max-h-[425px] justify-center flex flex-col rounded-lg outline outline-zinc-800">
             <div class="flex flex-row w-full h-full border-b-zinc-800">
                 <div class="w-full h-full flex justify-between flex-col border-r border-r-zinc-800">
-                    <p id="pokeP" class="text-3xl w-full bg-white/1 h-fit p-5 text-purple-500 max-w-full font-semibold border-b-zinc-800 border-b">PENDING
+                    <p class="items-center w-full flex justify-between bg-white/1 h-fit p-5 text-purple-500 max-w-full border-b-zinc-800 border-b">
+                        <span id="pokeP" class="text-3xl font-semibold">PENDING</span>
+                        <span id="pageNum" class="w-fit text-sm font-black px-3 justify-center py-1.5 text-center outline outline-zinc-800 rounded-full">?</span>
                     </p>
                     <div class="flex flex-row px-10 justify-center gap-10 items-center h-full">
-                        <button class="outline outline-zinc-800 text-purple-500 hover:bg-white/2.5 transition-all text-xl py-2 px-4 cursor-pointer rounded"><</button>
+                        <button id="prevImg" class="outline outline-zinc-800 text-purple-500 hover:bg-white/2.5 transition-all text-xl py-2 px-4 cursor-pointer rounded"><</button>
                         <div class="max-h-[250px] justify-center w-full h-full flex flex-row items-center">
                             <img src="" id="pokeImg" class="min-h-[125px]">
                             <img src="" id="pokeImg2" class="min-h-[125px]">
                         </div>
-                        <button class="outline outline-zinc-800 text-purple-500 hover:bg-white/2.5 transition-all text-xl py-2 px-4 cursor-pointer rounded">></button>
+                        <button id="nextImg" class="outline outline-zinc-800 text-purple-500 hover:bg-white/2.5 transition-all text-xl py-2 px-4 cursor-pointer rounded">></button>
                     </div>
                 </div>
                 <div class="min-h-[350px] w-[85%] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-500 overflow-hidden overflow-y-auto">
                     <p id="pokeP" class="text-3xl p-5 text-purple-500 w-full bg-white/1 font-semibold border-b-zinc-800 border-b backdrop-blur-sm top-0 sticky">....</p>
                     <div class="p-5 space-y-12.5">
                         <ul id="pokePhys" class="flex uppercase text-xl flex-col items-start space-y-3.5">
-                            <label for="pokePhys" id="pokePhysLabel" class="text-2xl text-purple-400 font-normal"></label>
+                            <li id="pokePhysLabel" class="text-2xl text-purple-400 font-normal"></li>
+                        </ul>
+                        <ul id="pokeMovesAndAbilities" class="flex uppercase text-xl flex-col items-start space-y-3.5">
+                            <li id="pokeMovesAndAbilitesLabel" class="text-2xl text-purple-400 font-normal"></li>
                         </ul>
                         <ul id="pokeOther" class="flex uppercase text-xl flex-col items-start space-y-3.5">
-                            <label for="pokePhys" id="pokeOtherLabel" class="text-2xl text-purple-400 font-normal"></label>
+                            <li id="pokeOtherLabel" class="text-2xl text-purple-400 font-normal"></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <!-- <div class="p-1 w-full h-fit border-t-zinc-700 flex justify-">
-                <p class="text-zinc-500 italic text-sm">More features coming soon...</p>
-            </div> -->
+            
         </div>
     </div>
 </body>
