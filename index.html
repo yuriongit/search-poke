@@ -1,74 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Boldonse&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Gruppo&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Marcellus&family=Momo+Signature&family=Momo+Trust+Display&family=Momo+Trust+Sans:wght@200..800&family=Playwrite+NO:wght@100..400&family=purple+Hat+Display:ital,wght@0,300..900;1,300..900&family=Stack+Sans+Headline:wght@200..700&family=TikTok+Sans:opsz,wght@12..36,300..900&family=Unbounded:wght@200..900&family=Varela+Round&display=swap" rel="stylesheet">
-    <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
-    <link href='https://cdn.boxicons.com/3.0.6/fonts/brands/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>SearchPoke | Pokemon Indexing</title>
-</head>
-<body style="font-family:'JetBrains Mono', monospace" class="[&::-webkit-scrollbar]:w-2
-[&::-webkit-scrollbar-track]:rounded-full
-[&::-webkit-scrollbar-thumb]:rounded-full
-[&::-webkit-scrollbar-thumb]:bg-purple-500 saturate-110 bg-linear-240 from-zinc-950 to-purple-600 via-purple-700 via-80% from-80% h-screen flex justify-center items-center text-zinc-300 justify-center">
-    <div id="mainDiv" class="space-y-2.5 p-15 flex justify-between min-w-full h-full flex-col items-center">
-        <div class="flex justify-center gap-5 w-full flex-col items-center">
-            <div class="flex items-baseline max-w-5xl justify-between w-full flex-row gap-10 max-w-4xl w-full border-b border-b-purple-500">
-                <h1 class="text-8xl font-bold text-white uppercase">Search<span class="text-purple-500">Poke</span></h1>
-                <p class="text-zinc-400 uppercase">Search all your favorite Poke's</p>
-            </div>
-            <div class="max-w-lg space-x-2.5 flex flex-row min-w-5xl w-full items-center">
-                <input type="text" placeholder="Try searching Squirtle..." autofocus id="pokeInput" placeholder='' autocomplete="off" class="uppercase text-zinc-400 outline w-full text-2xl outline-zinc-800 rounded px-3.5 py-2.5">
-                <button id="pokeButton" class="w-fit px-5 cursor-pointer transition-all hover:-rotate-x-10 hover:-rotate-y-8 ease-in-out duration-400 text-center text-2xl font-bold text-purple-500 outline outline-zinc-800 rounded py-2.5">
-                    <i class='bx bx-send'></i> 
-                </button>
-            </div>
-            <div class="bg-white/2 p-5 rounded max-w-5xl w-full h-fit items-center flex justify-center flex-col space-y-2.5">
-                <p class="text-lg text-center text-purple-500 font-semibold"><span class="">++</span> Pokemons of the Month<span class="rotate-90"> ++ </span></p>
-                <div id="popularPokemonsBtnsDiv" class="text-sm flex w-full flex-row items-center justify-center text-center max-w-4xl">
-
-                </div>
-            </div>
-        </div>
-        <div id="pokeBox" class="mb-10 w-full bg-white/0.5 max-w-5xl min-h-[400px] h-full max-h-[425px] justify-center flex flex-col rounded-lg outline outline-zinc-800 overflow-clip">
-            <div class="flex flex-row w-full h-full border-b-zinc-800">
-                <div class="w-full h-full flex justify-between flex-col border-r border-r-zinc-800">
-                    <p class="items-center w-full flex justify-between bg-white/1 h-fit p-5 text-purple-500 max-w-full border-b-zinc-800 border-b">
-                        <span id="pokeP" class="text-3xl font-semibold">??????</span>
-                        <span id="pageNum" class="w-fit text-sm font-black px-3 justify-center py-1.5 text-center outline outline-zinc-800 rounded-full">?</span>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Boldonse&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Gruppo&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Marcellus&family=Momo+Signature&family=Momo+Trust+Display&family=Momo+Trust+Sans:wght@200..800&family=Playwrite+NO:wght@100..400&family=purple+Hat+Display:ital,wght@0,300..900;1,300..900&family=Stack+Sans+Headline:wght@200..700&family=TikTok+Sans:opsz,wght@12..36,300..900&family=Unbounded:wght@200..900&family=Varela+Round&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdn.boxicons.com/3.0.6/fonts/brands/boxicons.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <title>SearchPoke | Pokemon Indexing</title>
+    </head>
+    <body
+        style="font-family: 'JetBrains Mono', monospace"
+        class="[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-600 bg-linear-240 from-zinc-950 to-black via-black via-80% from-80% h-screen flex justify-center flex-col items-center p-15 text-zinc-300 justify-center"
+    >
+    <div class="fixed inset-0 h-full w-full opacity-8 brightness-5000 select-none pointer-events-none z-0 bg-[url('../background-overlay.webp')] bg-cover"></div>
+        <div class="flex flex-row-reverse z-10 bg-black/50 backdrop-blur-xs rounded justify-between items-center outline outline-zinc-800 max-w-8xl h-full w-full">
+            <div
+            id="mainDiv"
+            class="space-y-15 p-15 w-full flex justify-center h-full flex-col items-center"
+    >
+                <div class="flex justify-center gap-5 w-fit flex-col items-center">
+                    <div
+                        class="flex items-baseline max-w-5xl justify-between w-full flex-row gap-10 max-w-4xl w-full border-b border-b-purple-600"
+                    >
+                    <h1 class="text-8xl font-bold text-white uppercase">
+                        Search<span class="text-purple-600">Poke</span>
+                    </h1>
+                    <p class="text-zinc-400 uppercase">
+                        Search all your favorite Poke's
                     </p>
-                    <div class="flex flex-row px-10 justify-center gap-10 items-center h-full">
-                        <button id="prevImg" class="outline outline-zinc-800 text-purple-500 hover:bg-white/2.5 transition-all text-xl py-2 px-4 cursor-pointer rounded"><</button>
-                        <div id="imagesBox" class="saturate-135 max-h-[250px] z-0 justify-center w-full h-full flex flex-row items-center">
-                            <img src="" id="pokeImg" class="min-h-[125px]">
-                            <img src="" id="pokeImg2" class="min-h-[125px]">
-                        </div>
-                        <button id="nextImg" class="outline outline-zinc-800 text-purple-500 hover:bg-white/2.5 transition-all text-xl py-2 px-4 cursor-pointer rounded">></button>
-                    </div>
                 </div>
-                <div class="min-h-[350px] w-[85%]">
-                    <p id="pokeP" class="text-3xl uppercase p-5 text-purple-500 w-full bg-white/1 font-black border-b-zinc-800 border-b backdrop-blur-2xl top-0 sticky">....</p>
-                    <div id="blurpurplePreviewDiv" class="p-5 space-y-15 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-500 overflow-hidden overflow-y-auto h-full">
-                        <ul id="pokePhys" class="flex uppercase text-base flex-col items-start space-y-3.5">
-                            <li id="pokePhysLabel" class="text-2xl text-purple-400 font-normal"></li>
-                        </ul>
-                        <ul id="pokeOther" class="flex uppercase text-base flex-col items-start space-y-3.5">
-                            <li id="pokeOtherLabel" class="text-2xl text-purple-400 font-normal"></li>
-                        </ul>
-                        <ul id="pokeMovesAndAbilities" class="flex uppercase text-base flex-col items-start space-y-3.5">
-                            <li id="pokeMovesAndAbilitesLabel" class="text-2xl text-purple-400 font-normal"></li>
-                        </ul>
+                <div
+                    class="max-w-lg space-x-2.5 flex flex-row min-w-5xl w-full items-center"
+                >
+                    <input
+                        type="text"
+                        placeholder="Try searching Squirtle..."
+                        autofocus
+                        id="pokeInput"
+                        placeholder=""
+                        autocomplete="off"
+                        class="uppercase text-zinc-400 outline w-full text-xl outline-zinc-800 rounded px-3.5 py-2.5"
+                    />
+                    <button
+                        id="pokeButton"
+                        class="w-fit px-5 cursor-pointer transition-all hover:-rotate-x-10 hover:-rotate-y-8 ease-in-out duration-400 text-center text-xl font-bold text-purple-600 outline outline-zinc-800 rounded py-2.5"
+                    >
+                        <i class="bx bx-send"></i>
+                    </button>
+                </div>
+                <div
+                    id="popularPokemonsBtnsDiv"
+                    class="text-sm flex p-1 outline outline-zinc-800 rounded text-center items-center flex-row w-full"
+                >
+                    <!-- <p
+                    class="text-lg bg-white h-fit w-full px-4 py-1 rounded-l uppercase text-purple-600 font-semibold"
+                    >
+                        <span>++</span> Not sure what to pick?<span
+                            >
+                            ++
+                        </span>
+                    </p> -->
+                </div>
+            </div>
+            <div
+                id="pokeBox"
+                class="mb-10 w-full bg-white/0.5 max-w-5xl min-h-[400px] h-full max-h-[425px] justify-center flex flex-col rounded-lg outline outline-zinc-800 overflow-clip"
+            >
+                <div class="flex flex-row w-full h-full border-b-zinc-800">
+                    <div
+                        class="min-w-[50%] h-full flex justify-between flex-col border-r border-r-zinc-800"
+                    >
+                        <p
+                            class="items-center w-full flex justify-between bg-white/1 h-fit p-5 text-purple-600 max-w-full border-b-zinc-800 border-b"
+                        >
+                            <span id="pokeP" class="text-3xl uppercase font-semibold"
+                                >Mystery</span
+                            >
+                            <span
+                                id="pageNum"
+                                class="w-fit text-sm font-black px-3 justify-center py-1.5 text-center outline outline-zinc-800 rounded-full"
+                                >?</span
+                            >
+                        </p>
+                        <div
+                            class="flex flex-row px-7.5 justify-center gap-10 items-center h-full"
+                        >
+                            <button
+                                id="prevImg"
+                                class="outline outline-zinc-800 text-purple-600 hover:bg-white/2.5 transition-all text-xl py-2.5 px-3 rounded"
+                            >
+                                <<
+                            </button>
+                            <div
+                                id="imagesBox"
+                                class="saturate-135 max-h-[250px] z-0 justify-center w-full h-full flex flex-row items-center"
+                            >
+                                <img
+                                    src=""
+                                    id="pokeImg"
+                                    class="min-h-[125px]"
+                                />
+                                <img
+                                    src=""
+                                    id="pokeImg2"
+                                    class="min-h-[125px]"
+                                />
+                            </div>
+                            <button
+                                id="nextImg"
+                                class="outline outline-zinc-800 text-purple-600 hover:bg-white/2.5 transition-all text-xl py-2.5 px-3 rounded"
+                            >
+                                >>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="min-h-[350px] h-full w-full min-w-[50%]">
+                        <p
+                            id="pokeP"
+                            class="text-3xl uppercase p-5 text-purple-600 w-full bg-white/1 font-black border-b-zinc-800 border-b top-0 sticky"
+                        >
+                            ....
+                        </p>
+                        <div
+                            id="purplePreviewDiv"
+                            class="p-5 flex flex-col gap-10 max-h-[350px] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-600 overflow-hidden overflow-y-auto"
+                        >
+                        <div class="flex text-purple-400 text-sm font-light flex-row px-2.5 justify-between">
+                            <ul class="flex justify-center min-h-[310px] items-center flex-col gap-5">
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                            </ul>
+                            <ul class="flex justify-center min-h-[310px] items-center flex-col gap-5">
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                            </ul>
+                            <ul class="flex justify-center min-h-[310px] items-center flex-col gap-5">
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                                <li>??????</li>
+                            </ul>
+                        </div>
+                        
+
+                        </div>
                     </div>
                 </div>
             </div>
             
         </div>
+        <nav
+            class="flex uppercase rounded rounded-r-none outline-zinc-800 outline backdrop-blur-xs h-full w-full max-w-[17.5%] justify-between p-2.5 flex-col"
+        >
+        <!-- <ul class="w-full">
+            <li>
+                <a href="#" class="rounded font-light outline outline-zinc-800 text-white p-2.5 hover:cursor-pointer w-full">
+                    Search<span class="text-orange-600 font-bold">Naruto</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="rounded font-light outline outline-zinc-800 text-white p-2.5 hover:cursor-pointer w-full">Search<span class="text-orange-600 font-bold">DigiMon</span></a>
+            </li>
+            <li>
+                <a href="#" class="rounded font-light outline outline-zinc-800 text-white p-2.5 hover:cursor-pointer w-full">Search<span class="text-orange-600 font-bold">DragonBall-Z</span></a>
+            </li>
+                <a href="#" class="rounded font-light outline outline-zinc-800 text-white p-2.5 hover:cursor-pointer w-full">Search<span class="text-orange-600 font-bold">Naruto</span></a>
+            </li>
+        </ul> -->
+            
+            
+        
+        
+
+            <ul class="w-full space-y-2.5">
+                <li class="w-full">
+                    <a href="#" class="w-full bg-white/2.5 hover:bg-white/5 duration-150 hover:bg-purple-600 ease-in-out p-2 outline outline-zinc-800/50 rounded flex justify-between flex-row-reverse items-center space-x-2">
+                        <i class="bx bx-group text-purple-600"></i>
+                        <span>Popular Pokemons</span>
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="#" class="w-full bg-white/2.5 hover:bg-white/5 duration-150 hover:bg-purple-600 ease-in-out p-2 outline outline-zinc-800/50 rounded flex justify-between flex-row-reverse items-center space-x-2">
+                        <i class="bx bx-play text-purple-600"></i>
+                        <span>Squirtle-Wordle</span>
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="#" class="w-full bg-white/2.5 hover:bg-white/5 duration-150 hover:bg-purple-600 ease-in-out p-2 outline outline-zinc-800/50 rounded flex justify-between flex-row-reverse items-center space-x-2">
+                        <i class="bx bx-trophy text-purple-600"></i>
+                        <span>Poke of the Week</span>
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="#" class="w-full bg-white/2.5 hover:bg-white/5 duration-150 hover:bg-purple-600 ease-in-out p-2 outline outline-zinc-800/50 rounded flex justify-between flex-row-reverse items-center space-x-2">
+                        <i class="bx bx-flag text-purple-600"></i>
+                        <span>Weekly Voting</span>
+                    </a>
+                </li>
+                <li class="w-full">
+                    <a href="#" class="w-full bg-white/2.5 hover:bg-white/5 duration-150 hover:bg-purple-600 ease-in-out p-2 outline outline-zinc-800/50 rounded flex justify-between flex-row-reverse items-center space-x-2">
+                        <i class="bx bx-book text-purple-600"></i>
+                        <span>Our Poke-Index</span>
+                    </a>
+                </li>
+                
+                
+
+            </ul>
+            
+            <label for="nav" class="text-xl text-center font-light outline outline-zinc-800 text-white p-2.5 hover:cursor-not-allowed rounded">Search<span class="text-purple-600">Poke</span></label>
+        </nav>
     </div>
-</body>
+
+        
+    </body>
 
     <script src="script.js"></script>
 </html>
